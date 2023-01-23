@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/i-VRESSE/bartender:
+      branch: main
+      repo: https://github.com/i-VRESSE/bartender
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/i-VRESSE/bartender git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-lemon-crane.sh
+        container: qc.acc_ready-silver-orangutan
+  QC.Doc:
+    repos:
+      github.com/i-VRESSE/bartender find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-cornflower-ant.sh
+        container: qc.doc_cheeky-cobalt-walrus
+      github.com/i-VRESSE/bartender git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-lavender-frog.sh
+        container: qc.doc_hazy-wisteria-reindeer
+      github.com/i-VRESSE/bartender markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-olivine-akita.sh
+        container: qc.doc_snoopy-rose-eel
+  QC.Lic:
+    repos:
+      github.com/i-VRESSE/bartender licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-ochre-weasel.sh
+        container: qc.lic_tacky-sangria-cattle
+  QC.Met:
+    repos:
+      github.com/i-VRESSE/bartender cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-razzmatazz-mole.sh
+        container: qc.met_crabby-mauve-cuttlefish
+  QC.Sec:
+    repos:
+      github.com/i-VRESSE/bartender bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-red-bracke.sh
+        container: qc.sec_shaggy-gamboge-cat
+  QC.Sty:
+    repos:
+      github.com/i-VRESSE/bartender flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-mauve-caiman.sh
+        container: qc.sty_zippy-gamboge-cow
+      github.com/i-VRESSE/bartender hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-tangerine-barb.sh
+        container: qc.sty_lovely-flax-husky
+  QC.Ver:
+    repos:
+      github.com/i-VRESSE/bartender get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-brass-llama.sh
+        container: qc.ver_skimpy-bistre-rhinoceros
+timeout: 5400
